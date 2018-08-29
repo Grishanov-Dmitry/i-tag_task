@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: silver;
+}
+
+.user__block {
+  width: 100%;
+  margin-top: 100px;
+}
+
+.wripper__user-information__block {
+  width: 80%;
+  margin: 0 auto;
+  background-color: aliceblue;
+}
+
+.user-information__block {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid green;
+  max-width: 270px;
+  margin: 0 auto;
+}
+
+.user-information__block h1 {
+  font-size: 14px;
+}
+
+.userComments {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.allComment {
+  width: 500px;
+  margin: 0 auto;
+  border: 1px solid green;
+  padding: 5%;
+}
