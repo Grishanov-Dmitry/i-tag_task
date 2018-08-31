@@ -20,6 +20,7 @@ function * fetchUser (action) {
       return fetch('https://jsonplaceholder.typicode.com/users') // Change!!!
         .then(res => res.json()
         //   .then(data => console.log(data))
+
         )
     }
     )
