@@ -27,6 +27,11 @@ body {
   margin: 0 auto;
 }
 
+.wripper__user-information__block a {
+  text-decoration: none;
+  color: #000;
+}
+
 .user-information__block h1 {
   font-size: 14px;
 }

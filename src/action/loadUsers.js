@@ -1,7 +1,7 @@
 
-export default ( date ) => {
-    return {
-        type: 'LOAD_USERS',
-        date: date
-    }
+export default (data) => {
+  return {
+    type: 'LOAD_USERS', // Changed
+    data: data
+  }
 }
