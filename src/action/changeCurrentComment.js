@@ -1,7 +1,8 @@
 
-export default (comment) => {
+export default (comment, title, body) => {
   return {
     type: 'CHANGE_CURRENT_COMMENT',
-    comment: comment
+    comment: title,
+    commentBody: body
   }
 }

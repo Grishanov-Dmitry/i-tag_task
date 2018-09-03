@@ -6,7 +6,7 @@ import { store } from './store'
 import { Route, Router } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import UserCommentsBlock from './сomponents/UserCommentsBlock'
-import AllUserComment from './сomponents/ShowAllComment'
+import UserPostWithComments from './сomponents/UserPostWithComment'
 
 const newHistory = createBrowserHistory()
 
@@ -17,8 +17,9 @@ class App extends Component {
         <Router history={newHistory}>
           <div>
             <Route exact path="/" component={UserData} />
-            <Route path="/user-posts" component={UserCommentsBlock}/>
-            <Route path="/user-posts/:id" component={AllUserComment}/>
+            <Route exact path='/user-posts' component={UserCommentsBlock}/>
+            <Route exact path='/user-posts/:id' render={(props) => (<UserCommentsBlock />)}/>
+            <Route exact path='/user-posts/:id/:commentId' render={(props) => (<UserPostWithComments />)}/>
           </div>
         </Router>
       </ Provider>

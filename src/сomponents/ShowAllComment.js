@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 
 export class AllUserComment extends React.Component {
   render () {
-    const { currentComment } = this.props.allState
+    let content = this.props.allState.userComments === undefined ? <h1>Loading</h1>
+
+      : this.props.allState.userComments[this.props.allState.currentUserId].body
 
     return (
 
@@ -11,7 +13,7 @@ export class AllUserComment extends React.Component {
         <div className='allComment'>
           <h1>My whole comment</h1> <br />
           <p>
-            { currentComment }
+            { content }
           </p>
         </div>
       </div>

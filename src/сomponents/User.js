@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export class User extends React.Component {
   render () {
@@ -6,13 +7,14 @@ export class User extends React.Component {
     const { street, city } = this.props.data.address
 
     return (
-
-      <div className='user-information__block' onClick={() => this.props.onClick(id)}>
-        <h1>{name}</h1>
-        <p>{email}</p>
-        <p>{street}</p>
-        <p>{city}</p>
-      </div>
+      <Link to={`/user-posts/${id}`}>
+        <div className='user-information__block' onClick={() => this.props.onClick(id)}>
+          <h1>{name}</h1>
+          <p>{email}</p>
+          <p>{street}</p>
+          <p>{city}</p>
+        </div>
+      </Link>
     )
   }
 }

@@ -6,11 +6,9 @@ import UserComments from './UserCommens'
 class UserCommentsBlock extends React.Component {
   render () {
     const { currentUserId, userComments, users } = this.props.allState
-    const curentUserId = currentUserId - 1
 
     let content = userComments === undefined ? <h1>Loading</h1>
       : <div>
-
         <User
           data={users[currentUserId]}
         />

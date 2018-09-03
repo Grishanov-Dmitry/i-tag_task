@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Comment } from './UserPost'
+import { Comment } from './Comment'
 import saveCurrentCommentId from '../action/saveCurrentCommentId'
 import saveCurrentComment from '../action/changeCurrentComment'
+import loadComments from '../action/loadComments'
 
 class UserComments extends React.Component {
   constructor (props) {
@@ -11,30 +12,29 @@ class UserComments extends React.Component {
     this.showComment = this.showComment.bind(this)
   }
 
-  saveCurrentCommentId (id) {
-    this.props.saveCurrentCommentId(id)
+  saveCurrentCommentId (id, state) {
+    this.props.saveCurrentCommentId(id, state)
   }
 
   showComment (id) {
+    const { userComments } = this.props.allState
+    this.props.loadComments(id)
     this.saveCurrentCommentId(id)
-    this.props.allState.userComments.map(item => {
+    userComments.map(item => {
       if (item.id === id) {
-        this.props.saveCurrentComment(id)
+        this.props.saveCurrentComment(id, item.title, item.body)
       }
     })
   }
 
   render () {
-    const { currentCommentId, userComments } = this.props.allState
-
-    const link = currentCommentId === undefined ? '/user-posts'
-      : `/user-posts/:${currentCommentId}`
+    const { userComments } = this.props.allState
 
     let content = userComments === undefined ? <h1>Loading</h1>
 
       : userComments.map((item, i) => {
         return (
-          <Link to={link} key={i}>
+          <Link to={`/user-posts/${item.userId}/${item.id}`} key={i}>
             <Comment
               id={item.id}
               comment={item.title}
@@ -62,8 +62,11 @@ const mapDispatchToProps = (dispatch) => {
     saveCurrentCommentId: (id) => {
       dispatch(saveCurrentCommentId(id))
     },
-    saveCurrentComment: (id) => {
-      dispatch(saveCurrentComment(id))
+    saveCurrentComment: (id, currentComment, currentCommentBody) => {
+      dispatch(saveCurrentComment(id, currentComment, currentCommentBody))
+    },
+    loadComments: (id) => {
+      dispatch(loadComments(id))
     }
   }
 }

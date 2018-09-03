@@ -14,7 +14,7 @@ export const reducer = (state = {}, action) => {
       )
     case 'SAVE_USER_ID':
       return Object.assign({}, state, {
-        currentUserId: action.id
+        currentUserId: action.id - 1
       }
       )
 
@@ -25,7 +25,13 @@ export const reducer = (state = {}, action) => {
       )
     case 'CHANGE_CURRENT_COMMENT':
       return Object.assign({}, state, {
-        currentComment: action.comment
+        currentComment: action.comment,
+        currentCommentTitle: action.commentBody
+      }
+      )
+    case 'SAVE_LOADED_COMMENTS':
+      return Object.assign({}, state, {
+        currentPostComments: action.data
       }
       )
     default:

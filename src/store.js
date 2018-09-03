@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { reducer } from './сomponents/redux/reducers/reducer'
 import createSagaMiddleware from 'redux-saga'
 import mySaga from './сomponents/redux/saga'
+import combineReducers from './сomponents/redux/reducers/combine'
 
 const sagaMiddleware = createSagaMiddleware()
 

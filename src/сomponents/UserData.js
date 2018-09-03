@@ -11,7 +11,6 @@ import { settings } from './sliderSettings'
 class UserData extends React.Component {
   constructor (props) {
     super(props)
-    this.fetchData = this.fetchData.bind(this)
     this.showUserPosts = this.showUserPosts.bind(this)
   }
 
@@ -21,11 +20,6 @@ class UserData extends React.Component {
 
   loadUserPosts (id) {
     this.props.loadUsersPosts({ type: 'LOAD_USER_POSTS', id })
-    // this.props.loadUsersPosts({ type: 'LOAD_USER_POSTS', id })
-    // fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
-    //   .then(response => response.json())
-    //   .then(usersDate => this.props.loadUsersPosts(usersDate)
-    //   )
   }
 
   showUserPosts (id) {
@@ -33,22 +27,15 @@ class UserData extends React.Component {
     this.loadUserPosts(id)
   }
 
-  fetchData () {
-    
-    // fetch('https://jsonplaceholder.typicode.com/users')
-    //   .then(response => response.json())
-    //   .then(usersDate => this.props.loadUsers(usersDate)
-    //   )
-  }
-
   componentDidMount () {
     this.props.loadUsers()
-    // this.fetchData()
   }
 
   render () {
-    let content = this.props.allState.users === undefined ? <h1>Loading</h1>
-      : this.props.allState.users.map((item, i) => {
+    const { users } = this.props.allState
+
+    let content = users === undefined ? <h1>Loading</h1>
+      : users.map((item, i) => {
         return (
           <Link to='/user-posts' key={i}>
             <User
