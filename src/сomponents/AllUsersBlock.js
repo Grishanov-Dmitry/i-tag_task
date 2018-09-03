@@ -8,7 +8,7 @@ import saveUserId from '../action/saveCurrentUserId'
 import Slider from 'react-slick'
 import { settings } from './sliderSettings'
 
-class UserData extends React.Component {
+class AllUsersBlock extends React.Component {
   constructor (props) {
     super(props)
     this.showUserPosts = this.showUserPosts.bind(this)
@@ -78,4 +78,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserData)
+export default connect(mapStateToProps, mapDispatchToProps)(AllUsersBlock)

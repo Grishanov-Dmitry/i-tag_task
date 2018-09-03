@@ -1,6 +1,6 @@
 import React from 'react'
 
-export class Comment extends React.Component {
+export class Post extends React.Component {
   render () {
     const { id, comment } = this.props
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Comment } from './Comment'
+import { Post } from './Post'
 import saveCurrentCommentId from '../action/saveCurrentCommentId'
 import saveCurrentComment from '../action/changeCurrentComment'
 import loadComments from '../action/loadComments'
@@ -13,10 +13,12 @@ class UserComments extends React.Component {
   }
 
   saveCurrentCommentId (id, state) {
+    debugger
     this.props.saveCurrentCommentId(id, state)
   }
 
   showComment (id) {
+    debugger
     const { userComments } = this.props.allState
     this.props.loadComments(id)
     this.saveCurrentCommentId(id)
@@ -35,7 +37,7 @@ class UserComments extends React.Component {
       : userComments.map((item, i) => {
         return (
           <Link to={`/user-posts/${item.userId}/${item.id}`} key={i}>
-            <Comment
+            <Post
               id={item.id}
               comment={item.title}
               key={i}

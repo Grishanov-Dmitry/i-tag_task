@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { User } from './User'
-import UserComments from './UserCommens'
+import UserPostsAndComments from './UserPostsAndComments'
 
-class UserCommentsBlock extends React.Component {
+class UserPostsBlock extends React.Component {
   render () {
     const { currentUserId, userComments, users } = this.props.allState
 
@@ -17,7 +17,7 @@ class UserCommentsBlock extends React.Component {
     return (
       <div>
         {content}
-        <UserComments />
+        <UserPostsAndComments />
       </div>
 
     )
@@ -30,4 +30,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(UserCommentsBlock)
+export default connect(mapStateToProps)(UserPostsBlock)
