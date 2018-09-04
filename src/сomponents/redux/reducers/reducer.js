@@ -6,7 +6,7 @@ export const reducer = (state = {}, action) => {
         users: action.data
       }
       )
-    case 'SAVE_LOADED_USER_POSTS': // It's a test action
+    case 'SAVE_LOADED_USER_POSTS':
       return Object.assign({}, state, {
         userComments: action.data
       }

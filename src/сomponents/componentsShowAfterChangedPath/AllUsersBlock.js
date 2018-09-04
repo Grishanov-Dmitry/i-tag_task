@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import loadUsers from '../action/loadUsers'
-import { User } from './User'
-import loadUsersPosts from '../action/loadUserPosts'
-import { Link } from 'react-router-dom'
-import saveUserId from '../action/saveCurrentUserId'
+import loadUsers from '../../action/loadUsers'
+import { User } from '../simpleComponents'
+import loadUsersPosts from '../../action/loadUserPosts'
+import saveUserId from '../../action/saveCurrentUserId'
 import Slider from 'react-slick'
-import { settings } from './sliderSettings'
+import { settings } from '../../style/sliderSettings'
 
 class AllUsersBlock extends React.Component {
   constructor (props) {
@@ -34,15 +33,14 @@ class AllUsersBlock extends React.Component {
   render () {
     const { users } = this.props.allState
 
-    let content = users === undefined ? <h1>Loading</h1>
+    const content = users === undefined ? <h1>Loading</h1>
       : users.map((item, i) => {
         return (
-          <Link to='/user-posts' key={i}>
-            <User
-              data={item}
-              onClick={this.showUserPosts}
-            />
-          </Link>
+          <User
+            data={item}
+            onClick={this.showUserPosts}
+            key={i}
+          />
         )
       })
 
