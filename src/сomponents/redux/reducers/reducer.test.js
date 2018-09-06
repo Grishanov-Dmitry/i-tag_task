@@ -1,0 +1,2 @@
+const reducer = require('./reducer');
+
