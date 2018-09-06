@@ -1,11 +1,13 @@
+export const initialState = {
+    currentUserId: undefined
+};
 
-export const reducer = (state = {}, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
     case 'TEST_ACTION':
-        return Object.assign({}, state, {
-            
-        }
-        );
+        return {
+            ...state
+        };
     case 'SAVE_LOADED_USERS':
         return Object.assign({}, state, {
             users: action.data
@@ -42,3 +44,5 @@ export const reducer = (state = {}, action) => {
         return state;
     }
 };
+
+// module.exports = reducer;
