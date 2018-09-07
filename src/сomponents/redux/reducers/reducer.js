@@ -1,5 +1,7 @@
 export const initialState = {
-    currentUserId: undefined
+    currentUserId: undefined,
+    userComments: [],
+    users: []
 };
 
 export const reducer = (state = initialState, action) => {
@@ -44,5 +46,3 @@ export const reducer = (state = initialState, action) => {
         return state;
     }
 };
-
-// module.exports = reducer;

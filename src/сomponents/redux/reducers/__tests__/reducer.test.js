@@ -56,4 +56,52 @@ describe('Our reducer', () => {
     
         expect(reducer(modifiedState, action)).toEqual(expectedState);
     });
+
+    it('should save load user posts', () => {
+        const modifiedState = {
+            ...initialState
+        };
+        const action = {
+            type: CHANGE_CURRENT_COMMENT.type,
+            comment: CHANGE_CURRENT_COMMENT.comment
+        };
+        const expectedState = {
+            ...modifiedState,
+            currentComment: action.comment
+        };
+    
+        expect(reducer(modifiedState, action)).toEqual(expectedState);
+    });
+
+    it('should save load user posts', () => {
+        const modifiedState = {
+            ...initialState
+        };
+        const action = {
+            type: SAVE_LOADED_USER_POSTS.type,
+            data: SAVE_LOADED_USER_POSTS.data
+        };
+        const expectedState = {
+            ...modifiedState,
+            userComments: action.data
+        };
+    
+        expect(reducer(modifiedState, action)).toEqual(expectedState);
+    });
+
+    it('should save load user comment', () => {
+        const modifiedState = {
+            ...initialState
+        };
+        const action = {
+            type: SAVE_LOADED_COMMENTS.type,
+            data: SAVE_LOADED_COMMENTS.data
+        };
+        const expectedState = {
+            ...modifiedState,
+            currentPostComments: action.data
+        };
+    
+        expect(reducer(modifiedState, action)).toEqual(expectedState);
+    });
 });

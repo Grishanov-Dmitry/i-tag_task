@@ -1,53 +1,51 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-function * fetchPosts (action) {
-  try {
-    const data = yield call((e) => {
-      return fetch(`https://jsonplaceholder.typicode.com/posts?userId=${action.id}`)
-        .then(res => res.json()
+function * fetchPosts ({id}) {
+    try {
+        const data = yield call(() => (
+            fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
+                .then(res => res.json()
+                )
         )
+        );
+        yield put({ type: 'SAVE_LOADED_USER_POSTS', data: data });
+    } catch (e) {
+        console.log('The error in the loading of posts');
     }
-    )
-    yield put({ type: 'SAVE_LOADED_USER_POSTS', data: data })
-  } catch (e) {
-    console.log('The error in the loading of posts')
-  }
 }
 
-function * fetchUser (action) {
-  try {
-    const data = yield call(() => {
-      return fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json()
-
+function * fetchComments ({postId}) {
+    try {
+        const data = yield call(() => (
+            fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
+                .then(res => res.json()
+                )
         )
+        );
+        yield put({ type: 'SAVE_LOADED_COMMENTS', data: data });
+    } catch (e) {
+        console.log('The error in the loading of comments');
     }
-    )
-    yield put({ type: 'SAVE_LOADED_USERS', data: data })
-  } catch (e) {
-    console.log('The error in the loading of users')
-  }
 }
 
-function * fetchComments (action) {
-  try {
-    const data = yield call(() => {
-      return fetch(`https://jsonplaceholder.typicode.com/comments?postId=${action.postId}`)
-        .then(res => res.json()
-
+function * foo() {
+    try {
+        const data = yield call(() => (
+            fetch('https://jsonplaceholder.typicode.com/users')
+                .then(res => res.json()
+                )
         )
+        );
+        yield put({ type: 'SAVE_LOADED_USERS', data: data });
+    } catch (e) {
+        console.log('The error in the loading of users');
     }
-    )
-    yield put({ type: 'SAVE_LOADED_COMMENTS', data: data })
-  } catch (e) {
-    console.log('The error in the loading of comments')
-  }
 }
 
 function * mySaga () {
-  yield takeEvery('LOAD_USER_POSTS', fetchPosts)
-  yield takeEvery('LOAD_USERS', fetchUser)
-  yield takeEvery('LOAD_COMMENTS', fetchComments)
+    yield foo();
+    yield takeEvery('LOAD_USER_POSTS', fetchPosts);
+    yield takeEvery('LOAD_COMMENTS', fetchComments);
 }
 
-export default mySaga
+export default mySaga;

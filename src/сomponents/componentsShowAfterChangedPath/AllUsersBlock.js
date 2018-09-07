@@ -7,60 +7,40 @@ import saveUserId from '../../action/saveCurrentUserId';
 import Slider from 'react-slick';
 import { settings } from '../../style/sliderSettings';
 
-class AllUsersBlock extends React.Component {
-    constructor (props) {
-        super(props);
-        this.showUserPosts = this.showUserPosts.bind(this);
-    }
+const showUserPosts = (props, id) => {
+    props.saveUserId(id);
+    props.loadUsersPosts({ type: 'LOAD_USER_POSTS', id }); 
+};
 
-    saveCurrentUserId (id) {
-        this.props.saveUserId(id);
-    }
+const getContent = (users, props) => 
+    users.map((item, i) => (
+        <User
+            data={item}
+            onClick={ (id) => showUserPosts(props, id) }
+            key={i}
+        />
+    ));
 
-    loadUserPosts (id) {
-        this.props.loadUsersPosts({ type: 'LOAD_USER_POSTS', id });
-    }
+const AllUsersBlock = (props) => {
+     
+    const { users } = props;
 
-    showUserPosts (id) {
-        this.saveCurrentUserId(id);
-        this.loadUserPosts(id);
-    }
+    const content = getContent(users, props);
 
-    componentDidMount () {
-        this.props.loadUsers();
-    }
-
-    render () {
-        const { users } = this.props.allState;
-
-        const content = users === undefined ? <h1>Loading</h1>
-            : users.map((item, i) => {
-                return (
-                    <User
-                        data={item}
-                        onClick={this.showUserPosts}
-                        key={i}
-                    />
-                );
-            });
-
-        return (
-            <div className='user__block'>
-                <div className={'wripper__user-information__block'}>
-                    <Slider {...settings}>
-                        {content}
-                    </Slider>
-                </div>
+    return (
+        <div className='user__block'>
+            <div className={'wripper__user-information__block'}>
+                <Slider {...settings}>
+                    {content}
+                </Slider>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
-function mapStateToProps (state) {
-    return {
-        allState: state
-    };
-}
+const mapStateToProps = (state) => ({
+    users: state.users
+});
 
 const mapDispatchToProps = (dispatch) => {
     return {

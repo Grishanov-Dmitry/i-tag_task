@@ -1,7 +1,6 @@
 
-export default (id) => {
-    return {
-        type: 'SAVE_USER_ID',
-        id: id
-    };
-};
+export default (id) => ({
+    type: 'SAVE_USER_ID',
+    id: id
+}
+);

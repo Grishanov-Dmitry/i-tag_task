@@ -3,25 +3,30 @@ import { connect } from 'react-redux';
 import { User } from '../simpleComponents';
 import { Comment } from '../simpleComponents';
 
-const UserPostWithComments = (props) => {
-    const { currentUserId, users, userComments } = props.allState;
-
-    const comment = userComments.map((item, i) => {
+const getContent = (userComments) => (
+    userComments.map((item, i) => {
         return (
             <Comment key={i} data={item} />
         );
-    });
+    })
+);
+
+
+const UserPostWithComments = ({ currentUserId, users, userComments, currentComment, currentCommentTitle }) => {
+
+    const comment = getContent(userComments);
+    
     return (
         <div >
-            <User data= {users[currentUserId]}/>
+            <User data={users[currentUserId]}/>
             <div className='post_with_comment'>
                 <div>
                     <h4>Title</h4>
-                    {props.allState.currentComment}
+                    {currentComment}
                 </div>
                 <div>
                     <h4>Comment</h4>
-                    {props.allState.currentCommentTitle}
+                    {currentCommentTitle}
                 </div>
                 { comment }
             </div>
@@ -31,7 +36,11 @@ const UserPostWithComments = (props) => {
 
 function mapStateToProps (state) {
     return {
-        allState: state
+        currentUserId: state.currentUserId,
+        users: state.users,
+        userComments: state.userComments,
+        currentComment: state.currentComment,
+        currentCommentTitle: state.currentCommentTitle
     };
 }
 

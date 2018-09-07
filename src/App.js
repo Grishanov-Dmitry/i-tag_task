@@ -10,19 +10,17 @@ import { UserPostWithComments } from './сomponents/componentsShowAfterChangedPa
 
 const newHistory = createBrowserHistory();
 
-const App = (props) => {
-    return (
-        <Provider store={store}>
-            <Router history={newHistory}>
-                <div>
-                    <Route exact path="/" component={AllUsersBlock} />
-                    <Route exact path='/user-posts' component={UserPostsBlock}/>
-                    <Route exact path='/user-posts/:id' render={() => (<UserPostsBlock />)}/>
-                    <Route exact path='/user-posts/:id/:commentId' render={() => (<UserPostWithComments />)}/>
-                </div>
-            </Router>
-        </ Provider>
-    );
-};
+const App = () => (
+    <Provider store={store}>
+        <Router history={newHistory}>
+            <div>
+                <Route exact path="/" component={AllUsersBlock} />
+                <Route exact path='/user-posts' component={UserPostsBlock}/>
+                <Route exact path='/user-posts/:id' render={() => (<UserPostsBlock />)}/>
+                <Route exact path='/user-posts/:id/:commentId' render={() => (<UserPostWithComments />)}/>
+            </div>
+        </Router>
+    </ Provider>
+);
 
 export default App;

@@ -2,65 +2,55 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Post } from '../simpleComponents';
-import saveCurrentCommentId from '../../action/saveCurrentCommentId';
-import saveCurrentComment from '../../action/changeCurrentComment';
-import loadComments from '../../action/loadComments';
+import saveCurrentCommentIdAcion from '../../action/saveCurrentCommentId';
+import { CHANGE_CURRENT_COMMENT } from '../../action';
+import { LOAD_COMMENTS } from '../../action';
 
-const UserComments = (props) => {
-    this.saveCurrentCommentId = (id, state) => {
-        props.saveCurrentCommentId(id, state);
-    };
+const showComment = (userComments, currentId) => {
+    LOAD_COMMENTS(currentId);
+    saveCurrentCommentIdAcion(currentId);
+    userComments.forEach(({id, title, body}) => {
+        if (id === currentId) {
+            CHANGE_CURRENT_COMMENT(id, title, body);
+        }
+    });
+};
 
-    this.showComment = (id) => {
-        const { userComments } = props.allState;
-        props.loadComments(id);
-        saveCurrentCommentId(id);
-        userComments.map(item => {
-            if (item.id === id) {
-                props.saveCurrentComment(id, item.title, item.body);
-            }
-            return item; // For debbug error in console
-        });
-    };
+const UserComments = ({userComments}) => {
 
-    const { userComments } = props.allState;
-
-    const content = userComments === undefined ? <h1>Loading</h1>
-
-        : userComments.map((item, i) => {
-            return (
-                <Link to={`/user-posts/${item.userId}/${item.id}`} key={i}>
-                    <Post
-                        id={item.id}
-                        comment={item.title}
-                        key={i}
-                        onClick={this.showComment}
-                    />
-                </Link>
-            );
-        });
+    const content = userComments.map(({title, userId, id}, i) => 
+        <Link to={`/user-posts/${userId}/${id}`} key={i}>
+            <Post
+                id={id}
+                comment={title}
+                key={i}
+                onClick={ () => showComment(userComments, id) }
+            />
+        </Link>
+    );
 
     return (
         <div className='userComments'>{content}</div>
     );
 };
 
-function mapStateToProps (state) {
-    return {
-        allState: state
-    };
+
+
+const mapStateToProps = ({userComments}) => ({
+    userComments
 }
+);
 
 const mapDispatchToProps = (dispatch) => {
     return {
         saveCurrentCommentId: (id) => {
-            dispatch(saveCurrentCommentId(id));
+            dispatch(saveCurrentCommentIdAcion(id));
         },
-        saveCurrentComment: (id, currentComment, currentCommentBody) => {
-            dispatch(saveCurrentComment(id, currentComment, currentCommentBody));
+        CHANGE_CURRENT_COMMENT: (id, currentComment, currentCommentBody) => {
+            dispatch(CHANGE_CURRENT_COMMENT(id, currentComment, currentCommentBody));
         },
-        loadComments: (id) => {
-            dispatch(loadComments(id));
+        LOAD_COMMENTS: (id) => {
+            dispatch(LOAD_COMMENTS(id));
         }
     };
 };
