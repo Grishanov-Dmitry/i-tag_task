@@ -28,7 +28,7 @@ function * fetchComments ({postId}) {
     }
 }
 
-function * foo() {
+function * fetchUsers() {
     try {
         const data = yield call(() => (
             fetch('https://jsonplaceholder.typicode.com/users')
@@ -43,7 +43,7 @@ function * foo() {
 }
 
 function * mySaga () {
-    yield foo();
+    yield fetchUsers();
     yield takeEvery('LOAD_USER_POSTS', fetchPosts);
     yield takeEvery('LOAD_COMMENTS', fetchComments);
 }

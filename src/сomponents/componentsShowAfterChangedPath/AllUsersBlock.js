@@ -21,7 +21,7 @@ const getContent = (users, props) =>
         />
     ));
 
-const AllUsersBlock = (props) => {
+export const AllUsersBlock = (props) => {
      
     const { users } = props;
 
@@ -38,22 +38,20 @@ const AllUsersBlock = (props) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    users: state.users
+const mapStateToProps = ({users}) => ({
+    users
 });
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        saveUserId: (id) => {
-            dispatch(saveUserId(id));
-        },
-        loadUsersPosts: (data) => {
-            dispatch(loadUsersPosts(data));
-        },
-        loadUsers: (data) => {
-            dispatch(loadUsers(data));
-        }
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    saveUserId: (id) => {
+        dispatch(saveUserId(id));
+    },
+    loadUsersPosts: (data) => {
+        dispatch(loadUsersPosts(data));
+    },
+    loadUsers: (data) => {
+        dispatch(loadUsers(data));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllUsersBlock);

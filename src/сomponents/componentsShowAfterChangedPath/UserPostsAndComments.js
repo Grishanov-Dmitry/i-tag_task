@@ -16,7 +16,7 @@ const showComment = (userComments, currentId) => {
     });
 };
 
-const UserComments = ({userComments}) => {
+export const UserComments = ({userComments}) => {
 
     const content = userComments.map(({title, userId, id}, i) => 
         <Link to={`/user-posts/${userId}/${id}`} key={i}>
@@ -41,18 +41,16 @@ const mapStateToProps = ({userComments}) => ({
 }
 );
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        saveCurrentCommentId: (id) => {
-            dispatch(saveCurrentCommentIdAcion(id));
-        },
-        CHANGE_CURRENT_COMMENT: (id, currentComment, currentCommentBody) => {
-            dispatch(CHANGE_CURRENT_COMMENT(id, currentComment, currentCommentBody));
-        },
-        LOAD_COMMENTS: (id) => {
-            dispatch(LOAD_COMMENTS(id));
-        }
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    saveCurrentCommentId: (id) => {
+        dispatch(saveCurrentCommentIdAcion(id));
+    },
+    CHANGE_CURRENT_COMMENT: (id, currentComment, currentCommentBody) => {
+        dispatch(CHANGE_CURRENT_COMMENT(id, currentComment, currentCommentBody));
+    },
+    LOAD_COMMENTS: (id) => {
+        dispatch(LOAD_COMMENTS(id));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserComments);

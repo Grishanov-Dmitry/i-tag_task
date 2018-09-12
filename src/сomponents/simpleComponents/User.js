@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const User = (props) => {
+export const User = props => {
     const { name, email, id } = props.data;
     const { street, city } = props.data.address;
 

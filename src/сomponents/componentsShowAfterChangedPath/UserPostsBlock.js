@@ -18,7 +18,7 @@ const UserPostsBlock = ({currentUserId, users}) => {
     );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     currentUserId: state.currentUserId,
     users: state.users,
     userComments: state.userComments,
